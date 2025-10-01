@@ -1,8 +1,8 @@
 import { FaLeaf, FaStar, FaTruck, FaShieldAlt, FaRecycle } from "react-icons/fa";
 // Example images (replace with your own assets)
-import banner1 from "../../../public/Product-image/onion.png";
-import banner2 from "../../../public/Product-image/Strawberrie.png";
-import banner3 from "../../../public/Product-image/Kale-Sprouts.png";
+import banner1 from "../../../public/fashion-image/men-with-sunglass.png";
+import banner2 from "../../../public/fashion-image/women-with-hat.png";
+import banner3 from "../../../public/fashion-image/enjoying-lovely-music.png";
 import banner4 from "../../../public/Product-image/carrots.png";
 
 export const homeBannerOffer = [
@@ -28,55 +28,41 @@ export const homeBannerOffer = [
   }
 ]
 
-
-
-
 export const slides = [
-  {
-    id: 1,
-    title: "Fresh Organic Carrots",
-    subtitle: "Vine-Ripened Perfection",
-    desc: "Juicy, sun-kissed tomatoes bursting with flavor, harvested at perfect ripeness from our organic farms",
-    img: banner4,
-    bgGradient: "from-red-500 to-rose-600",
-    textColor: "text-white",
-    buttonStyle: "bg-white text-red-600 hover:bg-red-50",
-    badge: "Farm Fresh"
-  },
-  {
-    id: 1,
-    title: "Farm Fresh Organic Vegetables",
-    subtitle: "100% Certified Organic",
-    desc: "Harvested at peak freshness from our sustainable farms, delivered straight to your doorstep",
-    img: banner1,
-    bgGradient: "from-emerald-500 to-green-600",
-    textColor: "text-white",
-    buttonStyle: "bg-white text-emerald-600 hover:bg-emerald-50",
-    badge: "Seasonal Special"
-  },
-  {
-    id: 2,
-    title: "Sweet Organic Berries",
-    subtitle: "Sun-Ripened Perfection",
-    desc: "Naturally sweet berries packed with antioxidants and flavor. Perfect for your healthy lifestyle",
-    img: banner2,
-    bgGradient: "from-rose-500 to-pink-600",
-    textColor: "text-white",
-    buttonStyle: "bg-white text-rose-600 hover:bg-rose-50",
-    badge: "New Harvest"
-  },
-  {
-    id: 3,
-    title: "Fresh Microgreens",
-    subtitle: "Nutrient-Dense Superfoods",
-    desc: "Power-packed microgreens with concentrated vitamins and minerals for optimal health",
-    img: banner3,
-    bgGradient: "from-teal-500 to-cyan-600",
-    textColor: "text-white",
-    buttonStyle: "bg-white text-teal-600 hover:bg-teal-50",
-    badge: "Limited Stock"
-  },
-];
+    {
+      id: 1,
+      title: "Elevate Your Style",
+      subtitle: "Premium Collection",
+      desc: "Discover the latest trends in fashion with our exclusive collection. Quality meets style in every piece.",
+      badge: "New Arrival",
+      bgGradient: "from-purple-900 via-pink-800 to-rose-900",
+      textColor: "text-white",
+      buttonStyle: "bg-white text-purple-900 hover:bg-gray-100",
+      img: banner1
+    },
+    {
+      id: 2,
+      title: "Summer Essentials",
+      subtitle: "Hot Deals",
+      desc: "Get ready for summer with our curated collection of must-have items at unbeatable prices.",
+      badge: "50% OFF",
+      bgGradient: "from-blue-900 via-cyan-800 to-teal-900",
+      textColor: "text-white",
+      buttonStyle: "bg-orange-500 text-white hover:bg-orange-600",
+      img: banner2
+    },
+    {
+      id: 3,
+      title: "Luxury Redefined",
+      subtitle: "Exclusive Edition",
+      desc: "Experience luxury like never before with our limited edition designer collections.",
+      badge: "Limited",
+      bgGradient: "from-gray-900 via-gray-800 to-gray-700",
+      textColor: "text-white",
+      buttonStyle: "bg-gold-500 text-gray-900 hover:bg-gold-600",
+      img: banner3
+    }
+  ];
 
 
 

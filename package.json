@@ -65,6 +65,7 @@
     "react-csv": "^2.2.2",
     "react-day-picker": "^9.8.1",
     "react-dom": "^19.0.0",
+    "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.60.0",
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^15.6.0",
