@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
-import { slides } from "@/utils/constant/homeBanner";
+import { slides } from "@/utils/constant/banner-constant";
 
 export default function Banner() {
 
@@ -59,7 +59,7 @@ export default function Banner() {
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className={`relative min-h-[50vh] lg:min-h-[60vh] bg-gradient-to-br ${slide.bgGradient}`}>
+              <div className={`relative min-h-[50vh] lg:min-h-[60vh] bg-gradient-to-br ${slide.bgGradient} container mx-auto mt-2 `}>
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{
@@ -190,20 +190,6 @@ export default function Banner() {
           ))}
         </Swiper>
 
-        {/* Custom Navigation */}
-        <div className="swiper-button-prev absolute left-4 lg:left-8 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-2xl">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </div>
-        <div className="swiper-button-next absolute right-4 lg:right-8 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 shadow-2xl">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-
-        {/* Custom Pagination */}
-        <div className="hero-pagination absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex justify-center space-x-2"></div>
       </div>
 
       {/* Features Bar */}

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
-import { slidesMobile } from "@/utils/constant/homeBanner";
+import { slidesMobile } from "@/utils/constant/banner-constant";
 
 export default function BannerMobile() {
 

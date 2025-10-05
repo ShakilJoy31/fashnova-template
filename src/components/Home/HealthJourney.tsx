@@ -1,10 +1,32 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
-import { features } from "@/utils/constant/homeBanner";
+import { FaArrowRight, FaSearch, FaShippingFast, FaShieldAlt, FaHeadset } from "react-icons/fa";
 
-export default function HealthyJourney() {
+const fashionFeatures = [
+  {
+    icon: FaSearch,
+    text: "Curated Selection",
+    subtext: "Handpicked premium fashion pieces"
+  },
+  {
+    icon: FaShippingFast,
+    text: "Express Delivery",
+    subtext: "Next day shipping available"
+  },
+  {
+    icon: FaShieldAlt,
+    text: "Quality Guarantee",
+    subtext: "Premium quality assurance"
+  },
+  {
+    icon: FaHeadset,
+    text: "Style Consultation",
+    subtext: "Personal styling experts"
+  }
+];
+
+export default function FashionExperience() {
     const scrollContainerRef = useRef(null);
     const [currentFeature, setCurrentFeature] = useState(0);
 
@@ -23,7 +45,6 @@ export default function HealthyJourney() {
         }
     };
 
-    // Optional: Update current feature on scroll
     useEffect(() => {
         const container = scrollContainerRef.current;
 
@@ -42,87 +63,161 @@ export default function HealthyJourney() {
         }
     }, []);
 
-
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="container mx-auto py-4 "
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="container mx-auto py-20 px-2 md:px-0"
         >
-
-            <div className="relative bg-gradient-to-r from-emerald-500 to-green-600 rounded-3xl p-4 md:p-6 lg:p-8 xl:p-12 shadow-2xl overflow-hidden">
+            {/* Luxury Fashion Container */}
+            <div className="relative bg-gradient-to-br from-black via-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 lg:p-16 xl:p-20 overflow-hidden">
                 
+                {/* Abstract Luxury Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
+                    <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                </div>
 
-                {/* Scrollable Features Section */}
-                <div className="relative mb-8 md:mb-12">
-                    <div className="flex overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-2 md:overflow-visible md:pb-0"
-                        ref={scrollContainerRef}>
-                        {features.map((feature, index) => (
+                {/* Geometric Accents */}
+                <div className="absolute top-8 right-8 w-4 h-4 border-t border-r border-white/30"></div>
+                <div className="absolute bottom-8 left-8 w-4 h-4 border-b border-l border-white/30"></div>
+                <div className="absolute top-8 left-8 w-2 h-2 bg-white/20 rounded-full"></div>
+                <div className="absolute bottom-8 right-8 w-2 h-2 bg-white/20 rounded-full"></div>
+
+                {/* Premium Features Section */}
+                <div className="relative mb-16 md:mb-20">
+                    <div 
+                        className="flex overflow-x-auto pb-6 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0 scrollbar-hide"
+                        ref={scrollContainerRef}
+                    >
+                        {fashionFeatures.map((feature, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                className="text-center group cursor-pointer flex-shrink-0 w-4/5 md:w-auto snap-center md:snap-none mr-4 last:mr-0 md:mr-0"
+                                transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+                                whileHover={{ scale: 1.05, y: -8 }}
+                                className="text-center group cursor-pointer flex-shrink-0 w-4/5 md:w-auto snap-center md:snap-none mr-6 last:mr-0 md:mr-0"
                                 onClick={() => handleFeatureClick(index)}
                             >
-                                <div className="flex items-center gap-x-2 bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:bg-transparent md:backdrop-blur-none md:p-0">
-                                    <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300">
-                                        <feature.icon className="text-white text-2xl" />
+                                {/* Luxury Feature Card */}
+                                <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-500 group-hover:bg-white/15">
+                                    {/* Icon Container */}
+                                    <div className="relative mb-4">
+                                        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/10 group-hover:border-white/30 transition-all duration-500">
+                                            <feature.icon className="text-white text-2xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                                        </div>
+                                        {/* Hover Effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     </div>
-                                    <div className="text-left">
-                                        <h4 className="font-bold text-white text-[12px] lg:text-lg mb-1">{feature.text}</h4>
-                                        <p className="text-gray-300 text-[10px] flex justify-start">{feature.subtext}</p>
+                                    
+                                    {/* Text Content */}
+                                    <div className="space-y-2">
+                                        <h4 className="font-light text-white text-lg tracking-wide group-hover:tracking-widest transition-all duration-500">
+                                            {feature.text}
+                                        </h4>
+                                        <p className="text-gray-400 text-sm font-light tracking-wide group-hover:text-gray-300 transition-colors duration-500">
+                                            {feature.subtext}
+                                        </p>
                                     </div>
+
+                                    {/* Active Indicator */}
+                                    {currentFeature === index && (
+                                        <motion.div 
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full"
+                                        />
+                                    )}
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* Mobile scroll indicators */}
-                    <div className="flex justify-center mt-4 md:hidden">
-                        {features.map((_, index) => (
-                            <div
+                    {/* Mobile Scroll Indicators */}
+                    <div className="flex justify-center mt-8 md:hidden">
+                        {fashionFeatures.map((_, index) => (
+                            <motion.div
                                 key={index}
-                                className={`w-2 h-2 rounded-full mx-1 ${currentFeature === index ? 'bg-white' : 'bg-white/30'}`}
-                            ></div>
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`w-2 h-2 rounded-full mx-1 transition-all duration-300 ${
+                                    currentFeature === index 
+                                        ? 'bg-white scale-125' 
+                                        : 'bg-white/30 scale-100'
+                                }`}
+                            ></motion.div>
                         ))}
                     </div>
                 </div>
 
-                {/* CTA Section */}
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div className="text-white">
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black mb-4">
-                            Start Your Healthy Journey Today
-                        </h3>
-                        <p className="text-emerald-100 text-md md:text-lg leading-relaxed">
-                            Join thousands of families who trust us for the freshest, most nutritious organic produce delivered to their doorstep
-                        </p>
+                {/* Luxury CTA Section */}
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Text Content */}
+                    <div className="space-y-6">
+                        <motion.h3
+                            initial={{ opacity: 0, x: -40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-tight"
+                        >
+                            Elevate Your
+                            <br />
+                            <span className="font-normal italic">Style Journey</span>
+                        </motion.h3>
+                        
+                        <motion.p
+                            initial={{ opacity: 0, x: -40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            viewport={{ once: true }}
+                            className="text-gray-300 text-lg md:text-xl leading-relaxed font-light tracking-wide max-w-2xl"
+                        >
+                            Join the community of style-conscious individuals who trust us for premium fashion curation and exceptional service.
+                        </motion.p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-end">
+                    {/* Action Buttons */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        viewport={{ once: true }}
+                        className="flex flex-col sm:flex-row gap-4 justify-end items-start"
+                    >
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, backgroundColor: "#fff", color: "#000" }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-white text-emerald-600 hover:bg-emerald-50 px-4 py-2 rounded-2xl font-bold text-md md:text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center gap-3 justify-center"
+                            className="bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-black px-8 py-4 rounded-lg font-light text-lg tracking-wide transition-all duration-500 flex items-center gap-4 group min-w-[200px] justify-center"
                         >
-                            Browse Products
-                            <FaArrowRight />
+                            Explore Collection
+                            <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                         </motion.button>
+                        
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, borderColor: "#fff", backgroundColor: "rgba(255,255,255,0.1)" }}
                             whileTap={{ scale: 0.95 }}
-                            className="border-2 border-white text-white hover:bg-white hover:text-emerald-600 px-4 py-2 rounded-2xl font-bold text-lg transition-all duration-300"
+                            className="border-2 border-white/30 text-white hover:border-white px-8 py-4 rounded-lg font-light text-lg tracking-wide transition-all duration-500 backdrop-blur-md min-w-[200px]"
                         >
-                            Learn More
+                            Style Guide
                         </motion.button>
-                    </div>
+                    </motion.div>
                 </div>
+
+                {/* Bottom Decorative Line */}
+                <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 1.2, delay: 0.8 }}
+                    viewport={{ once: true }}
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                />
             </div>
         </motion.div>
     );

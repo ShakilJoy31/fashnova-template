@@ -1,26 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
 import { ProductCardProps } from "@/types/product/productCardTypes";
 import { useCart } from "@/hooks/CartContext";
 import { useWishlist } from "@/hooks/WishlistContext";
 import { useRouter } from "next/navigation";
-import Button from "../reusable-components/Button";
+import { FaCartArrowDown } from "react-icons/fa";
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   className = "",
-  imageHeight = "h-48",
-  // showCategory = true,
+  imageHeight = "h-[480px]",
   showRating = true,
-  showActions = true,
 }) => {
   const router = useRouter();
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const isWishlisted = isInWishlist(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -39,134 +39,187 @@ const ProductCard: React.FC<ProductCardProps> = ({
     }
   };
 
+  const handleViewDetails = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push(`/products/product-details/${product.slug}`);
+  };
+
+  const discount = product.originalPrice
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
+
   return (
-    <div
-      className={`relative group rounded-[22px] w-full max-w-sm p-[2px] ${className}`}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      className={`relative group bg-white rounded-none overflow-hidden flex flex-col h-full ${className}`}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      {/* Gradient Shadow (now outside overflow clipping) */}
-      <div className="absolute -inset-2 rounded-[24px] bg-gradient-to-r from-[#6671AE] via-[#4584A8] to-[#76867A] blur-2xl opacity-0 group-hover:opacity-70 transition duration-500 pointer-events-none" />
+      {/* Main Content */}
+      <div className="relative flex-1">
+        {/* Image Container */}
+        <div className="relative overflow-hidden bg-neutral-50">
+          <div
+            onClick={() => router.push(`/products/product-details/${product.slug}`)}
+            className={`relative w-full ${imageHeight} cursor-pointer bg-white`}
+          >
+            {/* Image Loading */}
+            {!isImageLoaded && (
+              <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 animate-pulse" />
+            )}
 
-      {/* Gradient Border */}
-      {/* <div className="absolute inset-0 rounded-[22px] bg-gradient-to-r from-[#6671AE] via-[#4584A8] to-[#76867A]" /> */}
+            <Image
+              src={product.imageUrl[0]}
+              alt={product.name}
+              fill
+              className={`object-contain transition-all duration-1000 ${isImageLoaded ? 'opacity-100' : 'opacity-0'
+                } ${isHovered ? 'scale-105' : 'scale-100'}`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onLoad={() => setIsImageLoaded(true)}
+              priority
+            />
 
-      {/* Card Content */}
-      <div className="relative rounded-[20px] bg-white dark:bg-zinc-900 transition-all duration-300">
-        {/* Product Image */}
-        <div
-          onClick={() =>
-            router.push(`/products/product-details/${product.slug}`)
-          }
-          className={`relative w-full ${imageHeight} hover:cursor-pointer rounded-2xl overflow-hidden`}
-        >
-          <Image
-            src={product.imageUrl[0]}
-            alt={product.name}
-            fill
-            className="object-contain transition-transform duration-300 hover:scale-105 "
-          />
+            {/* Overlay Effects */}
+            <div className={`absolute inset-0 bg-black transition-all duration-500 ${isHovered ? 'opacity-10' : 'opacity-0'
+              }`} />
+
+            {/* Premium Badge */}
+            {discount > 0 && (
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                className="absolute top-2 left-2"
+              >
+                <div className="bg-purple-600 text-white px-4 py-2 text-sm font-light tracking-widest uppercase">
+                  -{discount}%
+                </div>
+              </motion.div>
+            )}
+
+          </div>
         </div>
 
-        {/* Name */}
-        <h3
-          onClick={() =>
-            router.push(`/products/product-details/${product.slug}`)
-          }
-          className="text-lg font-bold text-neutral-800 dark:text-white mt-2 hover:cursor-pointer line-clamp-1 px-2"
-        >
-          {product.name}
-        </h3>
+        {/* Product Info */}
+        <div className="p-1 md:p-2 lg:p-3 bg-white flex-1 flex flex-col">
+          {/* Category */}
+          {product.category && (
+            <p className="text-xs text-neutral-500 uppercase tracking-widest font-light mb-2">
+              {product.category}
+            </p>
+          )}
 
-        {/* Rating */}
-        {showRating && product.rating && (
-          <div className="flex items-center px-2">
-            {[...Array(5)].map((_, i) => (
-              <svg
-                key={i}
-                className={`w-4 h-4 ${i < Math.floor(product.rating!)
-                    ? "text-yellow-400"
-                    : "text-gray-300"
-                  }`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-            <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
-              ({product.reviewCount || 0})
-            </span>
-          </div>
-        )}
+          {/* Product Name */}
+          <h3
+            onClick={() => router.push(`/products/product-details/${product.slug}`)}
+            className="text-xl font-light text-black mb-3 cursor-pointer hover:opacity-70 transition-opacity duration-300 leading-tight"
+          >
+            {product.name.slice(0, 20)}{product.name.length > 20 ? '...' : ''}
+          </h3>
 
-        {/* Price & Actions */}
-        {showActions && (
-          <div className="flex justify-between items-center px-2 ">
-            {/* Price */}
-            <div className="flex items-center">
-              <span className="text-lg font-bold text-black dark:text-white">
+          {/* Rating */}
+          {showRating && product.rating && (
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar
+                    key={i}
+                    className={`${i < Math.floor(product.rating!)
+                      ? "text-black"
+                      : "text-neutral-300"
+                      }`}
+                    size={12}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-neutral-600 font-light">
+                ({product.reviewCount || 0})
+              </span>
+            </div>
+          )}
+
+          {/* Price & Actions */}
+          <div className="block md:flex items-center justify-between ">
+            <div className="flex items-baseline gap-3 mb-4 md:mb-0">
+              <span className="text-lg font-light text-black">
                 ৳{product.price.toFixed(2)}
               </span>
               {product.originalPrice && (
-                <span className="text-sm text-neutral-500 dark:text-neutral-400 line-through ml-2">
+                <span className="text-sm text-neutral-500 line-through font-light">
                   ৳{product.originalPrice.toFixed(2)}
                 </span>
               )}
             </div>
 
-            {/* Wishlist */}
-            <Button
-              onClick={handleWishlist}
-              className="p-2 rounded-full hover:cursor-pointer text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-            >
-              <AnimatePresence mode="wait" initial={false}>
+            {/* Action Buttons */}
+            <div className="flex items-center gap-2 ">
+              <AnimatePresence mode="wait">
                 {isWishlisted ? (
-                  <motion.div
+                  <motion.button
                     key="filled"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleWishlist}
+                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
                   >
-                    <FaHeart size={22} />
-                  </motion.div>
+                    <FaHeart size={20} className="text-red-500" />
+                  </motion.button>
                 ) : (
-                  <motion.div
+                  <motion.button
                     key="outlined"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleWishlist}
+                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
                   >
-                    <FaRegHeart size={22} />
-                  </motion.div>
+                    <FaRegHeart size={20} />
+                  </motion.button>
                 )}
               </AnimatePresence>
-            </Button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleAddToCart}
+                className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+              >
+                <FaCartArrowDown size={20} />
+              </motion.button>
+            </div>
           </div>
-        )}
-
-        {/* CTA */}
-        <div className=" h-10 flex gap-x-[1px]">
-
-          <Button
-             onClick={() =>
-            router.push(`/products/product-details/${product.slug}`)
-          }
-            className="w-full h-full hover:cursor-pointer rounded-bl-[22px] text-white flex items-center justify-center space-x-2 bg-gradient-to-r from-green-700 to-pink-700 text-xs font-bold hover:opacity-90 transition-colors" >
-            <span>Details</span>
-          </Button>
-
-          <Button
-            onClick={handleAddToCart}
-            className="w-full h-full hover:cursor-pointer rounded-br-[22px] text-white flex items-center justify-center space-x-2 bg-gradient-to-r from-pink-700 to-green-700 text-xs font-bold hover:opacity-90 transition-colors"
-          >
-            <span>Add to Cart</span>
-          </Button>
-
         </div>
-
       </div>
-    </div>
+
+      {/* View Details Button - Always at the bottom */}
+      <div className="mt-auto p-1 md:p-2 lg:p-3 bg-white border-t border-purple-500">
+        <motion.button
+          whileHover={{ scale: 1.02, backgroundColor: "#000", color: "#fff" }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleViewDetails}
+          className="w-full h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 border border-neutral-200 flex items-center justify-center font-light tracking-wide"
+        >
+          View Details
+        </motion.button>
+      </div>
+
+      {/* Hover Border Effect */}
+      <motion.div
+        className="absolute inset-0 border border-neutral-200 pointer-events-none"
+        animate={{
+          borderColor: isHovered ? "#000" : "#e5e5e5"
+        }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.div>
   );
 };
 
