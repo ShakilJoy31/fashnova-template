@@ -72,7 +72,7 @@ export const ProductListing: React.FC<NewProductsProps> = ({ products }) => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-4 mt-16 py-16 container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-4 mt-2 py-2 container mx-auto px-4">
             {/* Mobile Filter Toggle */}
             <div className="lg:hidden">
                 <Button

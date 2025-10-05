@@ -5,11 +5,7 @@ const categories = [
     "Men",
     "Women",
     "Cosmetics",
-    "Kids",
-    "Organic Food",
-    "Biscuits & Snacks",
-    "Fresh Fruits",
-    "Fruit & Vegetables",
+    "Kids"
 ];
 
 interface CategoryFilterProps {
