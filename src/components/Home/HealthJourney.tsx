@@ -69,7 +69,7 @@ export default function FashionExperience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="container mx-auto py-20 px-2 md:px-0"
+            className="container mx-auto py-4 px-2 "
         >
             {/* Luxury Fashion Container */}
             <div className="relative bg-gradient-to-br from-black via-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 lg:p-16 xl:p-20 overflow-hidden">

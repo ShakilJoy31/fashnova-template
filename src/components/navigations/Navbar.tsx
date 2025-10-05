@@ -34,18 +34,27 @@ export default function Navbar() {
   }, []);
 
   // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-        setActiveCategory(null);
-        setActiveSubcategory(null);
-      }
-    };
+// Close dropdown when clicking outside
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+      setActiveCategory(null);
+      setActiveSubcategory(null);
+    }
+  };
 
+  // Add event listener only when dropdown is open
+  if (isDropdownOpen) {
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  } else {
+    document.removeEventListener("mousedown", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [isDropdownOpen]); // Add isDropdownOpen as dependency
 
   const categories = {
     "Men": {
@@ -143,8 +152,9 @@ export default function Navbar() {
     setActiveSubcategory(subcategory);
   };
 
-  const handleCategoryClick = (mainCategory: string, subcategory: string, item: string) => {
-    console.log(`Navigating to: ${mainCategory} > ${subcategory} > ${item}`);
+  // mainCategory: string, subcategory: string, item: string
+
+  const handleCategoryClick = () => {
     setIsDropdownOpen(false);
     setActiveCategory(null);
     setActiveSubcategory(null);
@@ -180,12 +190,12 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-1">
             {/* Logo */}
-            <Image
+            <Image onClick={()=> router.push('/')}
               src={homeLogo}
               alt={'Fashnova Logo'}
               width={64}
               height={64}
-              className="w-12 h-12 relative"
+              className="w-12 h-12 relative hover:cursor-pointer "
             />
 
             {/* Desktop Search Bar */}
@@ -266,11 +276,6 @@ export default function Navbar() {
                     <div className="relative">
                       <button
                         onClick={handleDropdownToggle}
-                        onMouseEnter={() => {
-                          setIsDropdownOpen(true);
-                          setActiveCategory("Men");
-                          setActiveSubcategory("Clothing");
-                        }}
                         className={`flex hover:cursor-pointer items-center space-x-1 py-2 text-sm font-medium transition-all duration-200 ${isDropdownOpen
                             ? "text-purple-600 font-semibold"
                             : "text-gray-700 hover:text-purple-600"
@@ -340,7 +345,7 @@ export default function Navbar() {
                                             {items.slice(0, 6).map((item) => (
                                               <button
                                                 key={item}
-                                                onClick={() => handleCategoryClick(activeCategory, subcategory, item)}
+                                                onClick={() => handleCategoryClick()}
                                                 className="block w-full text-left text-xs text-gray-600 hover:text-purple-500 hover:bg-purple-50 px-2 py-1 rounded transition-all duration-200"
                                               >
                                                 {item}
@@ -354,7 +359,7 @@ export default function Navbar() {
                                     {/* View All Button */}
                                     <div className="pt-4 border-t border-gray-200">
                                       <button
-                                        onClick={() => handleCategoryClick(activeCategory, "all", "all")}
+                                        onClick={() => handleCategoryClick()}
                                         className="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors duration-200"
                                       >
                                         View All {activeCategory} Products →
@@ -467,7 +472,7 @@ export default function Navbar() {
                                                 {items.map((item) => (
                                                   <button
                                                     key={item}
-                                                    onClick={() => handleCategoryClick(category, subcategory, item)}
+                                                    onClick={() => handleCategoryClick()}
                                                     className="text-xs text-gray-600 hover:text-purple-500 hover:bg-purple-50 py-2 px-3 rounded-lg transition-all duration-200 text-left"
                                                   >
                                                     {item}

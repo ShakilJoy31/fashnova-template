@@ -1,95 +1,87 @@
-import { FaInstagram, FaFacebookF, FaTwitter, FaPinterestP, FaSearch } from "react-icons/fa";
+import { FaLeaf, FaInstagram, FaFacebookF, FaTwitter, FaPinterestP } from "react-icons/fa";
 import { MdLocationOn, MdEmail, MdLocalShipping } from "react-icons/md";
-import { GiDiamondRing } from "react-icons/gi";
+import { IoIosLeaf } from "react-icons/io";
+import { GiFruitBowl } from "react-icons/gi";
 import Paragraph from "../reusable-components/Paragraph";
 import Heading from "../reusable-components/Heading";
 import Link from "next/link";
 import Button from "../reusable-components/Button";
 import InputField from "../ui/input";
 import Image from "next/image";
-import homeLogo from "../../../public/fashnova-logo.png";
+import homeLogo from '../../../public/fashnova-logo.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-black via-gray-900 to-black text-gray-300 relative overflow-hidden">
-      {/* Luxury Pattern Background */}
+    <footer className="bg-gradient-to-b from-emerald-50 to-[#800080] text-gray-800 relative overflow-hidden">
+      {/* Organic Pattern Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10">
-          <Image
-              src={homeLogo}
-              alt={'Fashnova Logo'}
-              width={64}
-              height={64}
-              className="w-12 h-12 relative"
-            />
+          <IoIosLeaf className="text-6xl text-emerald-600" />
         </div>
         <div className="absolute top-20 right-20">
-          <GiDiamondRing className="text-5xl text-white" />
+          <GiFruitBowl className="text-5xl text-emerald-500" />
         </div>
         <div className="absolute bottom-20 left-1/4">
-          <FaSearch className="text-4xl text-white" />
+          <FaLeaf className="text-4xl text-emreald-400" />
         </div>
-        {/* Geometric Patterns */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <div className="absolute top-0 left-0 w-32 h-32 border-t border-l border-white/10"></div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 border-b border-r border-white/10"></div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="container mx-auto px-6 pt-20 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-        
-        {/* Brand Info */}
+      <div className="container mx-auto px-4 pt-16 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+
+        {/* Company Info */}
         <div className="lg:col-span-1">
-          <div className="mb-8">
+          <div className="mb-6">
             <div className="flex items-center gap-4 mb-6">
-               <Image
-              src={homeLogo}
-              alt={'Fashnova Logo'}
-              width={64}
-              height={64}
-              className="w-12 h-12 relative"
-            />
-              <Heading className="font-light text-3xl text-white tracking-wider">FASHNOVA</Heading>
+              <Image
+                src={homeLogo}
+                alt={'Fashnova Logo'}
+                width={64}
+                height={64}
+                className="w-12 h-12 relative"
+              />
+              <Heading className="font-light text-3xl text-black tracking-wider">FASHNOVA</Heading>
             </div>
-            <Paragraph className="text-sm mb-8 text-gray-400 leading-relaxed font-light tracking-wide">
-              Redefining modern elegance with curated luxury fashion. Each piece is meticulously crafted 
-              for the contemporary individual who values sophistication and timeless style.
+
+            <Paragraph className="text-sm mb-6 text-gray-600 leading-relaxed">
+              Nourishing lives with 100% organic, farm-fresh produce delivered straight to your doorstep.
+              We believe in sustainable farming and healthy living for all.
             </Paragraph>
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <MdLocationOn className="text-white text-xl mt-0.5 flex-shrink-0 opacity-70" />
-              <Paragraph className="text-sm text-gray-400 font-light">
-                123 Luxury Avenue,<br />
-                Fashion District,<br />
-                Metropolitan City, 10001
+            <div className="flex items-start gap-3">
+              <MdLocationOn className="text-black text-xl mt-0.5 flex-shrink-0" />
+              <Paragraph className="text-sm text-gray-700">
+                123 Green Valley Road,<br />
+                Organic Farming District,<br />
+                Fresh City, 10001
               </Paragraph>
             </div>
 
-            <div className="flex items-center gap-4">
-              <MdEmail className="text-white text-xl flex-shrink-0 opacity-70" />
-              <Paragraph className="text-sm text-gray-400 font-light">style@elevatefashion.com</Paragraph>
+            <div className="flex items-center gap-3">
+              <MdEmail className="text-black text-xl flex-shrink-0" />
+              <Paragraph className="text-sm text-gray-700">hello@organicharvest.com</Paragraph>
             </div>
 
-            <div className="flex items-center gap-4">
-              <MdLocalShipping className="text-white text-xl flex-shrink-0 opacity-70" />
-              <Paragraph className="text-sm text-gray-400 font-light">Complimentary express shipping</Paragraph>
+            <div className="flex items-center gap-3">
+              <MdLocalShipping className="text-black text-xl flex-shrink-0" />
+              <Paragraph className="text-sm text-gray-700">Free delivery on orders over $50</Paragraph>
             </div>
           </div>
 
           {/* Social Icons */}
-          <div className="flex gap-3 mt-8">
+          <div className="flex gap-3 mt-6">
             {[
-              { icon: <FaInstagram />, color: "bg-white/10 hover:bg-white/20 border-white/20" },
-              { icon: <FaFacebookF />, color: "bg-white/10 hover:bg-white/20 border-white/20" },
-              { icon: <FaTwitter />, color: "bg-white/10 hover:bg-white/20 border-white/20" },
-              { icon: <FaPinterestP />, color: "bg-white/10 hover:bg-white/20 border-white/20" }
+              { icon: <FaInstagram />, color: "bg-pink-500 hover:bg-pink-600" },
+              { icon: <FaFacebookF />, color: "bg-blue-600 hover:bg-blue-700" },
+              { icon: <FaTwitter />, color: "bg-sky-500 hover:bg-sky-600" },
+              { icon: <FaPinterestP />, color: "bg-red-600 hover:bg-red-700" }
             ].map((social, index) => (
-              <Link 
-                key={index} 
-                href="#" 
-                className={`${social.color} duration-500 text-white p-3 rounded-lg text-sm transform hover:scale-110 transition-all border backdrop-blur-sm`}
+              <Link
+                key={index}
+                href="#"
+                className={`${social.color} duration-300 text-white p-3 rounded-full text-sm transform hover:scale-110 transition-all shadow-lg`}
               >
                 {social.icon}
               </Link>
@@ -97,25 +89,25 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Fashion Collections */}
+        {/* Organic Categories */}
         <div>
-          <Heading className="font-light mb-8 text-white text-xl tracking-wider border-l-2 border-white/30 pl-4">
-            Collections
+          <Heading className="font-bold mb-6 text-black text-lg border-l-4 border-black pl-3">
+            Fresh Categories
           </Heading>
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {[
-              "Premium Apparel",
-              "Luxury Accessories",
-              "Designer Footwear",
-              "Evening Wear",
-              "Casual Elegance",
-              "Business Attire",
-              "Seasonal Collections",
-              "Limited Editions"
+              "Fresh Vegetables",
+              "Organic Fruits",
+              "Dairy & Eggs",
+              "Grains & Pulses",
+              "Herbs & Spices",
+              "Plant-Based Foods",
+              "Cold-Pressed Oils",
+              "Raw Honey & Syrups"
             ].map((item, index) => (
               <li key={index} className="group">
-                <span className="text-sm text-gray-400 hover:text-white cursor-pointer duration-300 flex items-center gap-3 group-hover:translate-x-2 transform transition-all font-light tracking-wide">
-                  <div className="w-1 h-1 bg-white/0 group-hover:bg-white rounded-full transition-all duration-300" />
+                <span className="text-sm text-gray-700 hover:text-white cursor-pointer duration-200 flex items-center gap-2 group-hover:translate-x-1 transform transition-transform">
+                  <FaLeaf className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
                   {item}
                 </span>
               </li>
@@ -123,25 +115,25 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Client Services */}
+        {/* Customer Service */}
         <div>
-          <Heading className="font-light mb-8 text-white text-xl tracking-wider border-l-2 border-white/30 pl-4">
-            Services
+          <Heading className="font-bold mb-6 text-black text-lg border-l-4 border-black pl-3">
+            Support
           </Heading>
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {[
-              "Personal Styling",
-              "Size Consultation",
-              "Alterations",
-              "VIP Fitting",
-              "Style Guides",
-              "Lookbook Access",
-              "Priority Access",
-              "Client Events"
+              "Contact Farmer",
+              "Delivery Info",
+              "Returns & Refunds",
+              "Quality Promise",
+              "Recipe Guides",
+              "Subscription Plans",
+              "Farm Visits",
+              "Sustainability"
             ].map((item, index) => (
               <li key={index} className="group">
-                <span className="text-sm text-gray-400 hover:text-white cursor-pointer duration-300 flex items-center gap-3 group-hover:translate-x-2 transform transition-all font-light tracking-wide">
-                  <div className="w-1 h-1 bg-white/0 group-hover:bg-white rounded-full transition-all duration-300" />
+                <span className="text-sm text-gray-700 hover:text-white cursor-pointer duration-200 flex items-center gap-2 group-hover:translate-x-1 transform transition-transform">
+                  <FaLeaf className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
                   {item}
                 </span>
               </li>
@@ -149,39 +141,38 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Newsletter & Authentication */}
+        {/* Newsletter */}
         <div>
-          <Heading className="font-light mb-8 text-white text-xl tracking-wider border-l-2 border-white/30 pl-4">
-            Join Our World
+          <Heading className="font-bold mb-6 text-black text-lg border-l-4 border-black pl-3">
+            Join Our Community
           </Heading>
-          <Paragraph className="text-sm mb-8 text-gray-400 font-light tracking-wide">
-            Receive exclusive previews, styling tips, and invitations to private events. 
-            Be the first to experience our latest collections.
+          <Paragraph className="text-sm mb-6 text-gray-600">
+            Get weekly recipes, farming updates, and exclusive offers delivered fresh to your inbox.
           </Paragraph>
-          
+
           <div className="flex flex-col gap-4">
             <InputField
               name="email"
               type="email"
-              placeholder="Enter your email"
-              icon={<MdEmail className="h-5 w-5 text-white/70" />}
-              className="border border-white/20 rounded-lg pl-12 pr-4 py-4 w-full focus:outline-none focus:border-white/40 bg-white/5 backdrop-blur-sm text-white placeholder-gray-400 transition-all duration-300"
+              placeholder="Your email address"
+              icon={<MdEmail className="h-5 w-5 text-emerald-600" />}
+              className="border-2 border-purple-700 rounded-lg pl-12 pr-4 py-2 w-full focus:outline-none focus:border-black bg-white shadow-sm transition-colors"
             />
-            <Button className="bg-white text-black hover:bg-gray-100 hover:cursor-pointer py-4 rounded-lg text-sm font-light tracking-wider transition-all duration-500 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
-              Subscribe to Updates
+            <Button className="bg-gradient-to-r hover:cursor-pointer from-black to-purple-600 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Subscribe to Newsletter
             </Button>
           </div>
 
-          {/* Luxury Authentication */}
-          <div className="mt-8 p-6 bg-white/5 rounded-xl border border-white/10 backdrop-blur-sm">
-            <Heading className="font-light mb-4 text-white text-sm tracking-wider">EXCLUSIVE ACCESS</Heading>
-            <div className="flex flex-wrap gap-3">
-              {["VIP Client", "Private Fittings", "Early Access", "Personal Shopper"].map((auth, index) => (
-                <span 
+          {/* Organic Certifications */}
+          <div className="mt-8 p-4 bg-purple-100 rounded-lg border border-purple-800 ">
+            <Heading className="font-bold mb-3 text-emerald-800 text-sm">Certified Organic</Heading>
+            <div className="flex flex-wrap gap-2">
+              {["USDA Organic", "EU Organic", "Non-GMO", "Soil Association"].map((cert, index) => (
+                <span
                   key={index}
-                  className="bg-white/10 px-4 py-2 rounded-full text-xs font-light text-white border border-white/20 backdrop-blur-sm tracking-wide"
+                  className="bg-white px-3 py-1 rounded-full text-xs font-medium text-emerald-700 border border-emerald-300 shadow-sm"
                 >
-                  {auth}
+                  {cert}
                 </span>
               ))}
             </div>
@@ -190,16 +181,16 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10 py-4">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
-          <Paragraph className="text-sm text-gray-400 mb-4 md:mb-0 text-center md:text-left font-light tracking-wide">
-            © 2024 ELEVATE. Crafting timeless elegance for the modern individual. ✦
+      <div className="border-t border-emerald-200 my-4 pt-6">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+          <Paragraph className="text-sm text-white mb-4 md:mb-0 text-center md:text-left">
+            © 2024 OrganicHarvest. Cultivating health, nurturing nature. 🌱
           </Paragraph>
-          <div className="flex flex-wrap justify-center gap-6">
-            {["Privacy Policy", "Terms of Service", "Client Care", "Sustainability"].map((item, index) => (
-              <span 
+          <div className="flex flex-wrap justify-center gap-4">
+            {["Privacy Policy", "Terms of Service", "Cookie Policy", "Sustainability Pledge"].map((item, index) => (
+              <span
                 key={index}
-                className="text-xs text-gray-400 hover:text-white cursor-pointer transition-colors duration-300 font-light tracking-wide"
+                className="text-xs text-white hover:text-emerald-700 cursor-pointer transition-colors duration-200 font-medium"
               >
                 {item}
               </span>
@@ -208,21 +199,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Luxury decorative elements */}
-      <div className="absolute bottom-8 right-8 hidden lg:block">
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-          <GiDiamondRing className="text-2xl text-white" />
+      {/* Floating decorative elements */}
+      <div className="absolute bottom-10 right-10 hidden lg:block">
+        <div className="bg-emerald-100 rounded-full p-3 animate-bounce">
+          <GiFruitBowl className="text-3xl text-emerald-600" />
         </div>
       </div>
-
-      {/* Top decorative elements */}
-      <div className="absolute top-8 left-8 hidden lg:block">
-        <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-      </div>
-
-      {/* Center decorative line */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
     </footer>
   );
 }
-

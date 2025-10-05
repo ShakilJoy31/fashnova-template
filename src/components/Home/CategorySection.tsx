@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { FaHeart, FaShoppingCart, FaRegHeart, FaPlus } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Button from "../reusable-components/Button";
@@ -106,11 +106,11 @@ export default function CategorySection({
   }
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-neutral-100 py-20 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-neutral-100 py-4 overflow-hidden">
       {/* Luxury Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-black/5 to-transparent rounded-full"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-black/3 to-transparent rounded-full"></div>
+        <div className="absolute top-0 left-1/2 w-96 h-96 bg-gradient-to-br from-[#9e009e38] to-transparent rounded-full"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-purple-600/9 to-transparent rounded-full"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"></div>
       </div>
 
@@ -121,11 +121,11 @@ export default function CategorySection({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-4"
         >
           {/* Luxury Badge */}
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
+            initial={{ scale: 0, rotate: -360 }}
             whileInView={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
             className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full mb-8"
@@ -135,13 +135,12 @@ export default function CategorySection({
             <div className="w-2 h-2 bg-white rounded-full"></div>
           </motion.div>
           
-          <Heading className="text-5xl md:text-6xl lg:text-8xl font-light text-black mb-8 tracking-tight">
+          <Heading className="text-3xl md:text-4xl lg:text-6xl font-light text-black mb-8 tracking-tight">
             ELEVATE
-            <br />
-            <span className="font-normal italic">YOUR STYLE</span>
+            <span className="font-normal italic ml-2">YOUR STYLE</span>
           </Heading>
           
-          <Paragraph className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
+          <Paragraph className="text-md text-gray-600 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
             Discover curated collections that redefine modern elegance. Each piece is crafted with precision and designed for the contemporary individual.
           </Paragraph>
         </motion.div>
@@ -152,9 +151,9 @@ export default function CategorySection({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative mb-20"
+          className="relative mb-4"
         >
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center justify-between mb-4">
             <Button
               onClick={() => scrollCategories('left')}
               className="p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-500 hover:scale-110 hover:bg-black hover:text-white group"
@@ -192,21 +191,14 @@ export default function CategorySection({
                   activeCategory === cat.name ? 'scale-110' : ''
                 }`}>
                   {/* Category Card */}
-                  <div className={`w-48 h-60 rounded-2xl p-0.5 transition-all duration-500 ${
+                  <div className={`w-32 h-16 rounded-2xl p-0.5 transition-all duration-500 ${
                     activeCategory === cat.name 
                       ? 'bg-gradient-to-br from-black via-gray-800 to-gray-900 shadow-2xl' 
                       : 'bg-gradient-to-br from-gray-200 to-gray-300 shadow-lg'
                   }`}>
-                    <div className={`w-full h-full rounded-[14px] flex flex-col items-center justify-center gap-6 transition-all duration-500 ${
+                    <div className={`w-full h-full rounded-[14px] flex flex-col items-center justify-center transition-all duration-500 ${
                       activeCategory === cat.name ? 'bg-black' : 'bg-white'
                     }`}>
-                      {/* Icon */}
-                      <div className={`text-3xl transition-all duration-500 ${
-                        activeCategory === cat.name ? 'text-white' : 'text-gray-400'
-                      } group-hover:scale-110`}>
-                        <FaPlus />
-                      </div>
-                      
                       {/* Category Name */}
                       <div className="text-center">
                         <span className={`text-lg font-light transition-colors duration-500 ${
@@ -226,7 +218,7 @@ export default function CategorySection({
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-black rounded-full"
+                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-black rounded-full"
                     />
                   )}
                 </div>
@@ -255,7 +247,7 @@ export default function CategorySection({
                   className="relative cursor-pointer group"
                 >
                   {/* Luxury Product Image */}
-                  <div className="relative h-[600px] overflow-hidden bg-gray-50">
+                  <div className="relative h-[400px] overflow-hidden bg-gray-50">
                     <Image
                       src={selectedProduct.imageUrl[0] || "/placeholder.jpg"}
                       alt={selectedProduct.name}
@@ -328,7 +320,7 @@ export default function CategorySection({
                           e.stopPropagation();
                           handleAddToCart(selectedProduct);
                         }}
-                        className="flex-1 bg-black text-white px-8 py-4 rounded-lg font-light tracking-wide hover:bg-gray-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                        className="flex-1 bg-black text-white px-4 py-2 rounded-lg font-light tracking-wide hover:bg-gray-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                       >
                         <FaShoppingCart className="w-4 h-4" />
                         Add to Cart
@@ -395,7 +387,7 @@ export default function CategorySection({
               >
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100">
                   {/* Product Image */}
-                  <div className="relative h-80 overflow-hidden bg-gray-50">
+                  <div className="relative h-48 overflow-hidden bg-gray-50">
                     <Image
                       src={product.imageUrl[0] || "/placeholder.jpg"}
                       alt={product.name}

@@ -84,8 +84,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
 
             {/* Overlay Effects */}
-            <div className={`absolute inset-0 bg-black transition-all duration-500 ${isHovered ? 'opacity-10' : 'opacity-0'
-              }`} />
+            {/* <div className={`absolute inset-0 bg-black transition-all duration-500 ${isHovered ? 'opacity-10' : 'opacity-0'
+              }`} /> */}
 
             {/* Premium Badge */}
             {discount > 0 && (
@@ -163,7 +163,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleWishlist}
-                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-purple-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
@@ -176,7 +176,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleWishlist}
-                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+                    className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-purple-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
@@ -190,7 +190,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleAddToCart}
-                className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
+                className="w-full md:w-12 h-12 hover:cursor-pointer bg-neutral-100 hover:bg-purple-600 hover:text-white flex items-center justify-center transition-all duration-300 border border-neutral-200"
               >
                 <FaCartArrowDown size={20} />
               </motion.button>
@@ -200,9 +200,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* View Details Button - Always at the bottom */}
-      <div className="mt-auto p-1 md:p-2 lg:p-3 bg-white border-t border-purple-500">
+      <div className="mt-auto p-1 md:p-2 lg:p-3 border-t border-purple-500">
         <motion.button
-          whileHover={{ scale: 1.02, backgroundColor: "#000", color: "#fff" }}
+          whileHover={{ scale: 1.019, backgroundColor: "#800080", color: "#fff" }}
           whileTap={{ scale: 0.98 }}
           onClick={handleViewDetails}
           className="w-full h-12 hover:cursor-pointer bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 border border-neutral-200 flex items-center justify-center font-light tracking-wide"

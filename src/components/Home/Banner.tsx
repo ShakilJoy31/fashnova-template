@@ -59,7 +59,7 @@ export default function Banner() {
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className={`relative min-h-[50vh] lg:min-h-[60vh] bg-gradient-to-br ${slide.bgGradient} container mx-auto mt-2 `}>
+              <div className={`relative min-h-[50vh] lg:min-h-[60vh] bg-gradient-to-br ${slide.bgGradient} container mx-auto my-2 `}>
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{
@@ -200,7 +200,7 @@ export default function Banner() {
         className="relative bg-white/80 backdrop-blur-lg border-t border-gray-100 shadow-2xl"
       >
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 py-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -208,13 +208,15 @@ export default function Banner() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="flex flex-col items-center text-center group cursor-pointer"
+                className="flex justify-center items-center gap-x-2 md:gap-x-3 lg:gap-x-4 group cursor-pointer"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 ">
                   <feature.icon className="text-white text-2xl" />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-1">{feature.text}</h3>
-                <p className="text-gray-600 text-sm">{feature.subtext}</p>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-md md:text-lg">{feature.text}</h3>
+                <p className="text-gray-600 text-xs md:text-sm">{feature.subtext}</p>
+                </div>
               </motion.div>
             ))}
           </div>
