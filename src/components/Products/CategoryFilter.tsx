@@ -2,10 +2,10 @@ import Heading from "../reusable-components/Heading";
 
 const categories = [
     "View All",
-    "Electronics",
-    "Accessories",
-    "Clothing",
-    "Grocery & Staples",
+    "Men",
+    "Women",
+    "Cosmetics",
+    "Kids",
     "Organic Food",
     "Biscuits & Snacks",
     "Fresh Fruits",
