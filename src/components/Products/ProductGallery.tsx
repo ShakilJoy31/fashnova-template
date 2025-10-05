@@ -52,7 +52,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
     <div className="space-y-4">
       {/* Main Image Container with Hover Zoom */}
       <div
-        className={`relative aspect-square overflow-hidden rounded-lg ${singleProductShadow} dark:bg-gray-800`}
+        className={`relative aspect-square overflow-hidden max-w-[600px] max-h-[600px] rounded-lg ${singleProductShadow} dark:bg-gray-800`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onMouseMove={handleMouseMove}
@@ -149,7 +149,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
       </div>
 
       {/* Thumbnail Navigation - No priority needed for thumbnails */}
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-6 gap-2">
         {images.map((image, index) => (
           <Button
             key={index}

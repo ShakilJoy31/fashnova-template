@@ -34,27 +34,26 @@ export default function Navbar() {
   }, []);
 
   // Close dropdown when clicking outside
-// Close dropdown when clicking outside
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      setIsDropdownOpen(false);
-      setActiveCategory(null);
-      setActiveSubcategory(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+        setActiveCategory(null);
+        setActiveSubcategory(null);
+      }
+    };
+
+    // Add event listener only when dropdown is open
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  };
 
-  // Add event listener only when dropdown is open
-  if (isDropdownOpen) {
-    document.addEventListener("mousedown", handleClickOutside);
-  } else {
-    document.removeEventListener("mousedown", handleClickOutside);
-  }
-
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [isDropdownOpen]); // Add isDropdownOpen as dependency
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const categories = {
     "Men": {
@@ -152,14 +151,11 @@ useEffect(() => {
     setActiveSubcategory(subcategory);
   };
 
-  // mainCategory: string, subcategory: string, item: string
-
   const handleCategoryClick = () => {
     setIsDropdownOpen(false);
     setActiveCategory(null);
     setActiveSubcategory(null);
     setIsMenuOpen(false);
-    // router.push(`/products?category=${mainCategory}&subcategory=${subcategory}&item=${item}`);
   };
 
   const handleMobileCategoryClick = (category: string) => {
@@ -170,6 +166,14 @@ useEffect(() => {
       setActiveCategory(category);
       setActiveSubcategory(Object.keys(categories[category as keyof typeof categories].subcategories)[0]);
     }
+  };
+
+  // Close dropdown when any navigation link is clicked
+  const handleNavLinkClick = () => {
+    setIsDropdownOpen(false);
+    setActiveCategory(null);
+    setActiveSubcategory(null);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -206,7 +210,7 @@ useEffect(() => {
                   placeholder="Search for products (e.g. iPhone, MacBook, Headphones)"
                   className="w-full px-6 py-3 rounded-full border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300 bg-gray-50 focus:bg-white"
                 />
-                <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-full transition-colors duration-200">
+                <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-purple-500 hover:bg-[#000000] text-white p-2 rounded-full transition-colors duration-200">
                   <FiSearch className="text-lg" />
                 </Button>
               </div>
@@ -215,7 +219,7 @@ useEffect(() => {
             {/* Action Icons */}
             <div className="flex items-center space-x-4">
               {/* Wishlist */}
-              <Button className="relative flex items-center space-x-1 text-gray-700 hover:text-purple-600 transition-colors duration-200 p-2">
+              <Button className="relative flex items-center space-x-1 text-gray-700 hover:text-[#000000] transition-colors duration-200 p-2">
                 <FiHeart className="text-xl" />
                 <span className="text-sm hidden lg:inline">Wishlist</span>
                 <span className={`absolute -top-1 -right-1 ${wishlistTotalItem === 0 ? '' : 'bg-red-500'} text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium`}>
@@ -224,7 +228,10 @@ useEffect(() => {
               </Button>
 
               {/* Cart */}
-              <Button onClick={() => router.push('/cart')} className="relative flex hover:cursor-pointer items-center space-x-1 text-gray-700 hover:text-purple-600 transition-colors duration-200 p-2">
+              <Button onClick={() => {
+                handleNavLinkClick();
+                router.push('/cart');
+              }} className="relative flex hover:cursor-pointer items-center space-x-1 text-gray-700 hover:text-[#000000] transition-colors duration-200 p-2">
                 <FiShoppingCart className="text-xl" />
                 <span className="text-sm hidden lg:inline">Cart</span>
                 <span className={`absolute -top-1 -right-1 ${totalItems === 0 ? '' : 'bg-red-500'} text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium`}>
@@ -233,7 +240,7 @@ useEffect(() => {
               </Button>
 
               {/* Profile */}
-              <button className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">
+              <button className="flex items-center space-x-2 text-gray-700 hover:text-[#000000] transition-colors duration-200">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                   <FiUser className="text-white text-sm" />
                 </div>
@@ -265,11 +272,11 @@ useEffect(() => {
       </div>
 
       {/* Navigation Links */}
-      <nav className="border-b border-gray-100 bg-white" ref={dropdownRef}>
+      <nav className="border-b border-gray-100 bg-white">
         <div className="container mx-auto px-4">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between py-1 relative">
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-8" ref={dropdownRef}>
               {navLinks.map((link, index) => (
                 <div key={index} className="relative">
                   {link.hasDropdown ? (
@@ -277,8 +284,8 @@ useEffect(() => {
                       <button
                         onClick={handleDropdownToggle}
                         className={`flex hover:cursor-pointer items-center space-x-1 py-2 text-sm font-medium transition-all duration-200 ${isDropdownOpen
-                            ? "text-purple-600 font-semibold"
-                            : "text-gray-700 hover:text-purple-600"
+                            ? "text-[#000000] font-semibold"
+                            : "text-gray-700 hover:text-[#000000]"
                           }`}
                       >
                         <span>{link.name}</span>
@@ -295,8 +302,6 @@ useEffect(() => {
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
                             className="absolute top-full left-0 mt-2 w-[800px] bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50"
-                            onMouseEnter={() => setIsDropdownOpen(true)}
-                            onMouseLeave={() => setIsDropdownOpen(false)}
                           >
                             <div className="flex h-96">
                               {/* Main Categories Sidebar */}
@@ -376,9 +381,10 @@ useEffect(() => {
                   ) : (
                     <Link
                       href={link.href}
+                      onClick={handleNavLinkClick}
                       className={`relative group py-2 text-sm font-medium transition-colors duration-200 ${link.isHighlighted
                           ? "text-red-600 font-semibold"
-                          : "text-gray-700 hover:text-purple-600"
+                          : "text-gray-700 hover:text-[#000000]"
                         }`}
                     >
                       {link.name}
@@ -392,15 +398,18 @@ useEffect(() => {
             </div>
 
             <div className="flex items-center space-x-6 text-xs text-gray-500">
-              <Link href="/terms-and-condition" className="hover:underline hover:text-purple-500 transition-colors duration-200">
+              <Link href="/terms-and-condition" onClick={handleNavLinkClick} className="hover:underline hover:text-[#000000] transition-colors duration-200">
                 Privacy Policy
               </Link>
               <a href="#" className="hover:text-gray-700 transition-colors duration-200">
                 Terms & Conditions
               </a>
               <div
-                onClick={() => setIsChatOpen(true)}
-                className="flex items-center hover:cursor-pointer space-x-1 bg-gray-100 px-3 py-1 rounded-full hover:bg-purple-50 hover:text-purple-600 transition-all duration-200 group"
+                onClick={() => {
+                  handleNavLinkClick();
+                  setIsChatOpen(true);
+                }}
+                className="flex items-center hover:cursor-pointer space-x-1 bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 hover:text-[#000000] transition-all duration-200 group"
               >
                 <span className="text-purple-500 group-hover:animate-pulse">●</span>
                 <span>Live Support</span>
@@ -426,7 +435,7 @@ useEffect(() => {
                           <button
                             className={`flex items-center justify-between w-full py-3 px-4 rounded-lg transition-colors duration-200 ${link.isHighlighted
                                 ? "bg-red-50 text-red-600 font-semibold"
-                                : "text-gray-700 hover:bg-purple-50 hover:text-purple-600"
+                                : "text-gray-700 hover:bg-purple-50 hover:text-[#000000]"
                               }`}
                             onClick={() => handleMobileCategoryClick("categories")}
                           >
@@ -446,7 +455,7 @@ useEffect(() => {
                                 {Object.entries(categories).map(([category, data]) => (
                                   <div key={category} className="space-y-2">
                                     <button
-                                      className="flex items-center justify-between w-full py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200"
+                                      className="flex items-center justify-between w-full py-2 text-gray-700 hover:text-[#000000] transition-colors duration-200"
                                       onClick={() => handleMobileCategoryClick(category)}
                                     >
                                       <div className="flex items-center space-x-2">
@@ -495,9 +504,9 @@ useEffect(() => {
                           href={link.href}
                           className={`block py-3 px-4 rounded-lg transition-colors duration-200 ${link.isHighlighted
                               ? "bg-red-50 text-red-600 font-semibold"
-                              : "text-gray-700 hover:bg-purple-50 hover:text-purple-600"
+                              : "text-gray-700 hover:bg-purple-50 hover:text-[#000000]"
                             }`}
-                          onClick={() => setIsMenuOpen(false)}
+                          onClick={handleNavLinkClick}
                         >
                           {link.name}
                         </Link>
@@ -514,10 +523,10 @@ useEffect(() => {
                     </a>
                     <button
                       onClick={() => {
+                        handleNavLinkClick();
                         setIsChatOpen(true);
-                        setIsMenuOpen(false);
                       }}
-                      className="flex items-center space-x-1 w-full py-2 px-4 text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition-colors duration-200"
+                      className="flex items-center space-x-1 w-full py-2 px-4 text-gray-700 hover:bg-purple-50 hover:text-[#000000] rounded-lg transition-colors duration-200"
                     >
                       <span className="text-purple-500">●</span>
                       <span>Live Support</span>
