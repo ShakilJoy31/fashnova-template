@@ -155,7 +155,7 @@ export default function Footer() {
               name="email"
               type="email"
               placeholder="Your email address"
-              icon={<MdEmail className="h-5 w-5 text-emerald-600" />}
+              icon={<MdEmail className="h-5 w-5 text-[#800080] " />}
               className="border-2 border-purple-700 rounded-lg pl-12 pr-4 py-2 w-full focus:outline-none focus:border-black bg-white shadow-sm transition-colors"
             />
             <Button className="bg-gradient-to-r hover:cursor-pointer from-black to-purple-600 text-white py-2 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">

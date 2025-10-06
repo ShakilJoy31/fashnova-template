@@ -19,7 +19,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <ProductCard product={product} />
+                        <ProductCard className="hover:scale-105 transition-transform" imageHeight="h-48" product={product} />
                     </motion.div>
                 ))}
             </div>
