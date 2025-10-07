@@ -179,7 +179,8 @@ export default function Navbar() {
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? "bg-white shadow-lg" : "bg-white"}`}>
       <div className="border-b border-purple-600">
-        <NavberMarque
+        <div className="container mx-auto px-4 ">
+          <NavberMarque
           items={[
             "Free Shipping on Orders Over $50",
             "New Collection Out Now!",
@@ -187,6 +188,7 @@ export default function Navbar() {
           ]}
           speed={60}
         />
+        </div>
       </div>
 
       {/* Main Navigation */}
