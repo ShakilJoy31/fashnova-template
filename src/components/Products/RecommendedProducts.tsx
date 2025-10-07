@@ -86,7 +86,7 @@ export default function RecommendedProducts({
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
-                        <ProductCard product={product} />
+                        <ProductCard imageHeight="h-48" product={product} />
                     </motion.div>
                 ))}
             </div>

@@ -22,7 +22,7 @@ export default function ProductDetail({ product, recommendedProducts }: ProductD
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="lg:w-2/5"
+                    className="lg:w-[35%]"
                 >
                     <ProductGallery product={product} />
                 </motion.div>

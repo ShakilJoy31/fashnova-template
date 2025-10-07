@@ -1,30 +1,12 @@
 // components/product/DeliveryOptions.tsx
 import { motion } from "framer-motion";
-import { Truck, Clock, MapPin, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import Heading from "../reusable-components/Heading";
 import Paragraph from "../reusable-components/Paragraph";
+import { deliveryOptions } from "@/utils/constant/productConstant";
 
 export default function DeliveryOptions() {
-  const deliveryOptions = [
-    {
-      icon: Truck,
-      title: "Free Shipping",
-      description: "Free delivery for orders above $50",
-      time: "2-5 business days",
-    },
-    {
-      icon: Clock,
-      title: "Express Delivery",
-      description: "Additional $10 fee",
-      time: "1-2 business days",
-    },
-    {
-      icon: MapPin,
-      title: "Store Pickup",
-      description: "Pick up from nearest store",
-      time: "Ready in 2 hours",
-    },
-  ];
+  
 
   return (
     <motion.div 
@@ -33,10 +15,10 @@ export default function DeliveryOptions() {
       transition={{ delay: 0.2 }}
       className="border border-cyan-300 rounded-lg p-4 dark:border-gray-700"
     >
-      <Heading className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+      <Heading className="text-lg font-medium text-gray-900 dark:text-white mb-2">
         Delivery Options
       </Heading>
-      <div className="space-y-3">
+      <div className="space-y-1">
         {deliveryOptions.map((option, index) => (
           <motion.div
             key={index}
