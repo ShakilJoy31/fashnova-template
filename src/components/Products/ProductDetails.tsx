@@ -15,7 +15,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product, recommendedProducts }: ProductDetailProps) {
     return (
-        <div className="container bg-white mx-auto p-4 rounded-md ">
+        <div className="container bg-purple-50 mx-auto p-4 rounded-md ">
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Left Column - Product Gallery */}
                 <motion.div
@@ -27,7 +27,7 @@ export default function ProductDetail({ product, recommendedProducts }: ProductD
                     <ProductGallery product={product} />
                 </motion.div>
 
-               <div className="lg:w-3/5">
+               <div className="lg:w-3/5 bg-white p-2 rounded-lg ">
                  {/* Right Column - Product Details */}
                 <ProductDetailsSection product={product} />
                </div>

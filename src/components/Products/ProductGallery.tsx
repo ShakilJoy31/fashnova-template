@@ -8,7 +8,6 @@ import productImage from "../../../public/product2.jpg";
 import Button from "../reusable-components/Button";
 import productImage2 from "../../../public/380.jpg";
 import Image from "next/image";
-import { singleProductShadow } from "@/utils/constant/colorConstant";
 
 interface ProductGalleryProps {
   product: Product;
@@ -52,7 +51,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
     <div className="space-y-4">
       {/* Main Image Container with Hover Zoom */}
       <div
-        className={`relative aspect-square overflow-hidden max-w-[500px] max-h-[500px] rounded-lg ${singleProductShadow} dark:bg-gray-800`}
+        className={`relative aspect-square overflow-hidden max-w-[500px] max-h-[500px] rounded-lg bg-white shadow-md dark:bg-gray-800`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onMouseMove={handleMouseMove}
@@ -154,7 +153,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
           <Button
             key={index}
             onClick={() => setSelectedImageIndex(index)}
-            className={`aspect-square overflow-hidden rounded-md border-2 ${
+            className={`aspect-square overflow-hidden bg-white rounded-md border-2 ${
               selectedImageIndex === index
                 ? "border-cyan-600 border-2 dark:border-cyan-200"
                 : "border-transparent"

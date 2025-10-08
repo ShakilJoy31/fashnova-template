@@ -32,46 +32,46 @@ export default function CheckoutForm() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto p-6 mt-12 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto p-6 ">
       {/* Billing Section */}
-      <div className="border border-cyan-500 rounded-md">
-        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-cyan-500 rounded-tr-md rounded-tl-md py-2">Billing To</h2>
+      <div className="border border-purple-500 rounded-md">
+        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-purple-500 rounded-tr-md rounded-tl-md py-2 bg-purple-100 text-black">Billing To</h2>
 
         <div className="space-y-3 px-6 pb-6">
           <InputField
             label="Name *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             placeholder="Shakil joy"
           />
 
           <InputField
             label="Address *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             placeholder="Street address"
           />
 
           <InputField
             label="Town / City *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             placeholder="Town / City"
           />
 
           <InputField
             label="Postcode / Zip *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             placeholder="Postcode / Zip"
           />
 
           <InputField
             label="Email Address *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             type="email"
             placeholder="shakil@gmail.com"
           />
 
           <InputField
             label="Phone *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+            className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
             type="tel"
             placeholder="01766556565"
           />
@@ -79,11 +79,11 @@ export default function CheckoutForm() {
       </div>
 
       {/* Order Section */}
-      <div className="border border-cyan-500 rounded-md">
-        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-cyan-500 rounded-tr-md rounded-tl-md py-2">Your order</h2>
+      <div className="border border-purple-500 rounded-md">
+        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-purple-500 rounded-tr-md rounded-tl-md py-2 bg-purple-100 text-black">Your order</h2>
 
         <div className="px-6 pb-6">
-          <div className="border-b border-gray-200 pb-4 mb-4">
+          <div className="border-b border-purple-500 pb-4 mb-4">
             <div className="flex justify-between mb-2 text-sm">
               <span className="font-medium">Product</span>
               <span className="font-medium">Total</span>
@@ -107,17 +107,17 @@ export default function CheckoutForm() {
           </div>
 
           <h3 className="text-sm font-semibold mb-2">Payment With Card</h3>
-          <div className="border border-gray-300 rounded-md px-4 py-3 mb-6">
+          <div className="border border-purple-500 rounded-md px-4 py-3 mb-6">
             <InputField onChange={(e) => setCardNumber(e.target.value)}
               label="Card Number *"
-              className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+              className="border border-purple-500 rounded px-3 py-1.5 w-full focus:outline-none"
               type="text"
               placeholder="Card Number"
             />
           </div>
 
           <Button
-            className={`w-full bg-gradient-to-r from-cyan-600 to-blue-700 text-white py-2 rounded-md transition-colors font-medium flex items-center justify-center ${isProcessing || isComplete || cardNumber.length !== 16 ? "cursor-not-allowed" : "cursor-pointer"
+            className={`text-white w-full bg-gradient-to-r from-white via-purple-400 to-purple-700 py-2 rounded-md transition-colors font-medium flex items-center justify-center ${isProcessing || isComplete || cardNumber.length !== 16 ? "cursor-not-allowed" : "cursor-pointer"
               }`}
             onClick={onCheckout}
             disabled={isProcessing || isComplete || cardNumber.length !== 16}
