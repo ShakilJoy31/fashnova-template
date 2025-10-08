@@ -18,12 +18,12 @@ export default function CheckoutForm() {
 
   const onCheckout = () => {
     setIsProcessing(true);
-    
+
     // Simulate processing time
     setTimeout(() => {
       setIsProcessing(false);
       setIsComplete(true);
-      
+
       // Reset after 5 seconds
       setTimeout(() => {
         setIsComplete(false);
@@ -34,10 +34,10 @@ export default function CheckoutForm() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto p-6 mt-12 ">
       {/* Billing Section */}
-      <div>
-        <h2 className="text-xl font-bold mb-4">Billing To</h2>
+      <div className="border border-cyan-500 rounded-md">
+        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-cyan-500 rounded-tr-md rounded-tl-md py-2">Billing To</h2>
 
-        <div className="space-y-3">
+        <div className="space-y-3 px-6 pb-6">
           <InputField
             label="Name *"
             className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
@@ -79,63 +79,66 @@ export default function CheckoutForm() {
       </div>
 
       {/* Order Section */}
-      <div className="border border-cyan-500 rounded-md p-6">
-        <h2 className="text-xl font-bold mb-6">Your order</h2>
+      <div className="border border-cyan-500 rounded-md">
+        <h2 className="text-xl font-bold mb-4 text-center shadow shadow-cyan-500 rounded-tr-md rounded-tl-md py-2">Your order</h2>
 
-        <div className="border-b border-gray-200 pb-4 mb-4">
-          <div className="flex justify-between mb-2 text-sm">
-            <span className="font-medium">Product</span>
-            <span className="font-medium">Total</span>
+        <div className="px-6 pb-6">
+          <div className="border-b border-gray-200 pb-4 mb-4">
+            <div className="flex justify-between mb-2 text-sm">
+              <span className="font-medium">Product</span>
+              <span className="font-medium">Total</span>
+            </div>
+
+            {items.map((item) => (
+              <div key={item.id} className="flex justify-between mb-2 text-sm">
+                <span>{item.name} × {item.quantity}</span>
+                <span>${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            ))}
           </div>
-          
-          {items.map((item) => (
-            <div key={item.id} className="flex justify-between mb-2 text-sm">
-              <span>{item.name} × {item.quantity}</span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
-            </div>
-          ))}
+
+          <div className="flex justify-between mb-2 text-sm">
+            <span>Cart Subtotal</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between font-semibold text-lg mb-6">
+            <span>Order Total</span>
+            <span>${orderTotal.toFixed(2)}</span>
+          </div>
+
+          <h3 className="text-sm font-semibold mb-2">Payment With Card</h3>
+          <div className="border border-gray-300 rounded-md px-4 py-3 mb-6">
+            <InputField onChange={(e) => setCardNumber(e.target.value)}
+              label="Card Number *"
+              className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
+              type="text"
+              placeholder="Card Number"
+            />
+          </div>
+
+          <Button
+            className={`w-full bg-gradient-to-r from-cyan-600 to-blue-700 text-white py-2 rounded-md transition-colors font-medium flex items-center justify-center ${isProcessing || isComplete || cardNumber.length !== 16 ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
+            onClick={onCheckout}
+            disabled={isProcessing || isComplete || cardNumber.length !== 16}
+          >
+            {isProcessing ? (
+              <div className="flex items-center justify-center w-full">
+                <MdLocalShipping size={25} className="animate-moveRight mr-2" />
+                <span>Processing...</span>
+              </div>
+            ) : isComplete ? (
+              <div className="flex items-center justify-center w-full">
+                <MdDone size={25} className="text-green-300 mr-2" />
+                <span>Order Complete!</span>
+              </div>
+            ) : (
+              "Place Order"
+            )}
+          </Button>
         </div>
 
-        <div className="flex justify-between mb-2 text-sm">
-          <span>Cart Subtotal</span>
-          <span>${subtotal.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between font-semibold text-lg mb-6">
-          <span>Order Total</span>
-          <span>${orderTotal.toFixed(2)}</span>
-        </div>
 
-        <h3 className="text-sm font-semibold mb-2">Payment With Card</h3>
-        <div className="border border-gray-300 rounded-md px-4 py-3 mb-6">
-          <InputField onChange={(e)=> setCardNumber(e.target.value)}
-            label="Card Number *"
-            className="border border-cyan-500 rounded px-3 py-1.5 w-full focus:outline-none"
-            type="text"
-            placeholder="Card Number"
-          />
-        </div>
-
-        <Button
-          className={`w-full bg-gradient-to-r from-cyan-600 to-blue-700 text-white py-2 rounded-md transition-colors font-medium flex items-center justify-center ${
-            isProcessing || isComplete || cardNumber.length !== 16 ? "cursor-not-allowed" : "cursor-pointer"
-          }`}
-          onClick={onCheckout}
-          disabled={isProcessing || isComplete || cardNumber.length !== 16}
-        >
-          {isProcessing ? (
-            <div className="flex items-center justify-center w-full">
-              <MdLocalShipping size={25} className="animate-moveRight mr-2" />
-              <span>Processing...</span>
-            </div>
-          ) : isComplete ? (
-            <div className="flex items-center justify-center w-full">
-              <MdDone size={25} className="text-green-300 mr-2" />
-              <span>Order Complete!</span>
-            </div>
-          ) : (
-            "Place Order"
-          )}
-        </Button>
       </div>
     </div>
   );

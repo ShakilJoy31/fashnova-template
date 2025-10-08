@@ -41,7 +41,7 @@ export default function Banner() {
           pagination={{
             clickable: true,
             el: ".hero-pagination",
-            renderBullet: (index, className) => {
+            renderBullet: (className) => {
               return `<span class="${className} !w-12 !h-1 !bg-white/60 !mx-1 !rounded-full !transition-all !duration-500 hover:!bg-white !scale-110"></span>`;
             },
           }}
