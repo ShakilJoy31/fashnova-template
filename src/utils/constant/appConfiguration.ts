@@ -33,4 +33,4 @@ export const appConfiguration: IConfigurationProps = {
 
 // Production Url........
 // https://fashnova-kappa.vercel.app
-export const baseUrl = 'https://fashnova-kappa.vercel.app';
+export const baseUrl = 'http://localhost:3000';
