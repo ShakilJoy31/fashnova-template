@@ -11,7 +11,7 @@ interface IConfigurationProps {
 }
 
 const version = "V1.0.0";
- 
+  
 //////////// BETA VERSION ////////////
 
 export const appConfiguration: IConfigurationProps = {
